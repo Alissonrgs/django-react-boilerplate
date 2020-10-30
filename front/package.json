@@ -7,8 +7,6 @@
     "watch": "webpack --config config/webpack.dev.js --watch",
     "build": "webpack --config config/webpack.dev.js --progress",
     "build-prod": "webpack --config config/webpack.prod.js --progress",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
