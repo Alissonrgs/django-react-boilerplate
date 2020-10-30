@@ -3,6 +3,7 @@ import time
 
 # django
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
@@ -13,9 +14,14 @@ from django.urls import reverse_lazy
 from allauth.account.forms import LoginForm as AllauthLoginForm
 from allauth.account.utils import passthrough_next_redirect_url
 from allauth.account.views import PasswordResetView
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
 from two_factor.views import LoginView
 from two_factor.views import PhoneSetupView
 from two_factor.views import SetupView
+
+# local
+from .serializers import UserSerializer
 
 
 class CustomLoginView(LoginView):
@@ -109,3 +115,14 @@ class CustomPasswordResetView(PasswordResetView):
         # (end NOTE)
         ret.update({"login_url": login_url})
         return ret
+
+
+class UserAPIView(GenericAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get(self, request, *args, **kwargs):
+        instance = request.user
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
