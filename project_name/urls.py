@@ -48,7 +48,8 @@ urlpatterns = [
     path('jsreverse/', cache_page(3600)(urls_js), name='js_reverse'),
 
     # project
-    path('', core_views.index_view, name='index')
+    path('', core_views.landing_view, name='landing'),
+    path('project', core_views.index_view, name='index')
 ]
 
 if settings.DEBUG:
