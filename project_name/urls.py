@@ -20,8 +20,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 # third party
+from django_js_reverse.views import urls_js
 
 # project
 from core import views as core_views
@@ -30,6 +32,10 @@ from core import views as core_views
 urlpatterns = [
     # django
     path('admin/', admin.site.urls),
+
+    path('jsreverse/', cache_page(3600)(urls_js), name='js_reverse'),
+
+    path('', core_views.TipTemplateView.as_view(), name='index'),
 ]
 
 if settings.DEBUG:

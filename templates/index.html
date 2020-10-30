@@ -1,0 +1,23 @@
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% load webpack_static from webpack_loader %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {% comment %} <link rel="shortcut icon" href="{% static 'favicon.ico' %}"></head> {% endcomment %}
+
+    <title>TIPTOP</title>
+
+    {% render_bundle 'main' 'css' %}
+  </head>
+  <body>
+    <div id="root"></div>
+    {% comment %} <script src="{% url 'javascript-catalog' %}" type="text/javascript"></script> {% endcomment %}
+    <script src="{% url 'js_reverse' %}" type="text/javascript" charset="utf-8"></script>
+    {% render_bundle 'main' 'js' %}
+  </body>
+</html>
