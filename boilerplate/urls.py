@@ -20,16 +20,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
-from django.views.decorators.cache import cache_page
 
 # third party
-from django_js_reverse.views import urls_js
-from two_factor.admin import AdminSiteOTPRequired
-from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
 
 # project
-from accounts.allauth_urls import urlpatterns as allauth_urls
-from accounts.tf_urls import urlpatterns as tf_urls
 from core import views as core_views
 
 admin.site.__class__ = AdminSiteOTPRequired
@@ -38,11 +32,6 @@ admin.site.__class__ = AdminSiteOTPRequired
 urlpatterns = [
     # django
     path('admin/', admin.site.urls),
-
-    # auth
-    # path('', include(allauth_urls)),
-    # path('', include(tf_urls)),
-    # path('', include(tf_twilio_urls)),
 ]
 
 if settings.DEBUG:
