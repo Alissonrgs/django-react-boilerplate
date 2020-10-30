@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'django_extensions',
+    'django_js_reverse',
+    'webpack_loader',
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
@@ -265,8 +267,30 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#staticfiles-dirs
 STATICFILES_DIRS = [
     BASE_DIR / 'statics',
+    BASE_DIR / 'front' / 'dist'
 ]
 
+
+# ### DJANGO JS REVERSE ###
+
+# https://django-js-reverse.readthedocs.io/en/stable/#options
+JS_REVERSE_JS_VAR_NAME = 'dj_urls'
+JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
+
+# ### WEBPACK LOADER ###
+# https://github.com/owais/django-webpack-loader
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': BASE_DIR / 'front' / 'dist' / 'webpack-stats.json',
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+        'LOADER_CLASS': 'webpack_loader.loader.WebpackLoader'
+    }
+}
 
 # ### MEDIA ###
 
