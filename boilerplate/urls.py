@@ -26,8 +26,6 @@ from django.urls import path
 # project
 from core import views as core_views
 
-admin.site.__class__ = AdminSiteOTPRequired
-
 
 urlpatterns = [
     # django
