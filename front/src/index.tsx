@@ -1,5 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import { Provider } from 'react-redux';
+import store from "./store";
 
 import {
   HashRouter,
@@ -10,10 +13,12 @@ import './index.css'
 import App from './App'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <HashRouter>
-      <Route path="/" component={ App } />
-    </HashRouter>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <HashRouter>
+        <Route path="/" component={ App } />
+      </HashRouter>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 )
