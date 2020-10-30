@@ -1,5 +1,5 @@
 // project imports
-import Landing from "../containers/landing"
+import Landing from "../containers/home"
 
 // local imports
 import { IRouteItem } from "./types"
@@ -15,4 +15,4 @@ const Route:IRouteItem[] = [
   },
 ]
 
-export default Route;
+export default Route
