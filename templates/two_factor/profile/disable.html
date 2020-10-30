@@ -1,0 +1,27 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n two_factor %}
+{% load static %}
+
+{% block content %}
+<div class="ui segment">
+  <img class="ui image" style="margin: auto" width="200px"
+       src="{% static '' %}">
+
+  <div class="ui huge header">
+    {% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}
+  </div>
+
+  <div class="ui warning message">
+    {% blocktrans %}You are about to disable two-factor authentication. This
+    weakens your account security, are you sure?{% endblocktrans %}
+  </div>
+
+  <form method="post" class="ui form">
+    {% csrf_token %}
+    {% include "two_factor/_form.html" with form=form %}
+
+    <button type="submit" class="fluid ui button negative">
+      {% trans "Disable" %}</button>
+  </form>
+</div>
+{% endblock %}
