@@ -1,5 +1,8 @@
+// react imports
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+// third party imports
 import {
   Button,
   Divider,
@@ -11,6 +14,7 @@ import {
 
 // statics
 import {Text} from './styles'
+
 
 const TopMenu: React.FC<any> = (props) => {
   return (
@@ -48,8 +52,7 @@ const TopMenu: React.FC<any> = (props) => {
             <>
               <Icon name='bell' />
             </>
-          }
-        >
+          }>
           <Dropdown.Menu className='menu-dropdown'>
             <Dropdown.Header>
               <Header>
@@ -90,8 +93,7 @@ const TopMenu: React.FC<any> = (props) => {
           pointing='top right'
           trigger={
               <Icon name='user' />
-          }
-          >
+          }>
             <Dropdown.Menu>
               <Dropdown.Header>
                 <Header as={Link} to='/profile'>

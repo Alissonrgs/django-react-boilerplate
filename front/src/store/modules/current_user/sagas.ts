@@ -1,7 +1,11 @@
+// third party imports
 import { AxiosResponse } from 'axios'
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 
+// project imports
 import { api } from '../../../services/api'
+
+// local imports
 import { fetchCurrentUser, fetchCurrentUserSuccess } from './actions'
 import { IUserState, UserTypes } from './types'
 

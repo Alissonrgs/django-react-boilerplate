@@ -1,7 +1,8 @@
+// third party imports
 import axios, { AxiosRequestConfig } from 'axios'
-import _ from 'lodash'
+import queryString from 'query-string'
+import { isEmpty } from 'lodash'
 
-const queryString = require('query-string')
 
 declare const window:any
 const AXIOS_CONFIG:AxiosRequestConfig = {
@@ -19,7 +20,7 @@ export const api = {
   get(url:string, params={}, filters={}) {
     url = dj_urls[url](params)
     const search = queryString.stringify(filters)
-    if (!_.isEmpty(search))
+    if (!isEmpty(search))
       url = `${url}?${search}`
     return axios.get(url, AXIOS_CONFIG)
   },

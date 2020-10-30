@@ -15,7 +15,7 @@ import { map } from 'lodash'
 
 import routes from '../../routes/Route'
 
-const AccordionMenu = (props) => {
+const SideMenu = (props) => {
   return (
     <Accordion as={Menu} inverted vertical>
       {
@@ -42,4 +42,4 @@ const AccordionMenu = (props) => {
     </Accordion>
   )
 }
-export default AccordionMenu
+export default SideMenu

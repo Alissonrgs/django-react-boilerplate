@@ -1,9 +1,13 @@
+// react imports
 import React, { useState } from 'react'
+
+// third party imports
 import { Sidebar } from 'semantic-ui-react'
-import AccordionMenu from './accordion-menu'
 
 // components
+import SideMenu from './side-menu'
 import TopMenu from './top-menu'
+
 
 const TMenu: React.FC = ({children}) => {
     const [sideBarVisible, setSideBarVisible] = useState(false)
@@ -25,11 +29,11 @@ const TMenu: React.FC = ({children}) => {
         width='wide'
         onHide={ handleSidebarHide }
         visible={sideBarVisible}>
-        <AccordionMenu handleSidebarHide={handleSidebarHide} />
+        <SideMenu handleSidebarHide={handleSidebarHide} />
       </Sidebar>
       <Sidebar.Pusher dimmed={sideBarVisible}>
         <TopMenu
-            handleSidebarVisibleChange={handleSidebarVisibleChange} />
+          handleSidebarVisibleChange={handleSidebarVisibleChange} />
         { children }
       </Sidebar.Pusher>
     </Sidebar.Pushable>
