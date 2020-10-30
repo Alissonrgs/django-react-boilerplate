@@ -1,4 +1,4 @@
-PROJECT := boilerplate
+PROJECT := project_name
 
 clean:
 	./manage.py clean_pyc
