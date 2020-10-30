@@ -22,14 +22,31 @@ from django.urls import include
 from django.urls import path
 
 # third party
+from two_factor.admin import AdminSiteOTPRequired
+from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
 
 # project
+from accounts.allauth_urls import urlpatterns as allauth_urls
+from accounts.tf_urls import urlpatterns as tf_urls
 from core import views as core_views
+
+admin.site.__class__ = AdminSiteOTPRequired
 
 
 urlpatterns = [
-    # django
+    # admin
     path('admin/', admin.site.urls),
+
+    # auth
+    path('', include(allauth_urls)),
+    path('', include(tf_urls)),
+    path('', include(tf_twilio_urls)),
+
+    # third party
+
+    # project
+    path('', core_views.landing_view, name='landing'),
+    path('project', core_views.index_view, name='index')
 ]
 
 if settings.DEBUG:

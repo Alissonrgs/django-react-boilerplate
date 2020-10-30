@@ -1,0 +1,82 @@
+{% load form-tags %}
+
+{% if field.field.widget.input_type == 'select' %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    <label>{{ field.label }}</label>
+    {{ field|addclass:"ui search dropdown" }}
+  </div>
+{% elif field.field.widget.input_type == 'checkbox' %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    <div class="ui checkbox">
+      {{ field }}
+      <label>{{ field.label }}</label>
+    </div>
+  </div>
+{% elif field.field.widget.input_type == 'text' %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    <label style="float: left;">{{ field.label }}</label>
+    <div class="ui left icon input">
+      <input id="{{ field.auto_id }}" type="{{ field.field.widget.input_type }}"
+             name="{{ field.html_name }}"
+             placeholder="{{ field.field.widget.attrs.placeholder|default:field.label }}"
+             class="{{ field.auto_id }}">
+      {% if field.name == 'number' %}
+        <i class="phone icon"></i>
+      {% elif field.name == 'otp_token' %}
+        <i class="key icon"></i>
+      {% endif %}
+    </div>
+    {% if field.help_text %}
+      <small>{{ field.help_text|safe }}</small>
+    {% endif %}
+  </div>
+{% elif field.field.widget.input_type == 'email' %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    <label style="float: left;">{{ field.label }}</label>
+    <div class="ui left icon input">
+      <input id="{{ field.auto_id }}" type="{{ field.field.widget.input_type }}"
+             name="{{ field.html_name }}"
+             placeholder="{{ field.field.widget.attrs.placeholder|default:field.label }}"
+             class="{{ field.auto_id }}">
+      <i class="envelope icon"></i>
+    </div>
+    {% if field.help_text %}
+      <small>{{ field.help_text|safe }}</small>
+    {% endif %}
+  </div>
+{% elif field.field.widget.input_type == 'password' %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    <label style="float: left;">{{ field.label }}</label>
+    <div class="ui left icon input">
+      <input id="{{ field.auto_id }}" type="{{ field.field.widget.input_type }}"
+             name="{{ field.html_name }}"
+             placeholder="{{ field.field.widget.attrs.placeholder|default:field.label }}"
+             class="{{ field.auto_id }}">
+      <i class="lock icon"></i>
+    </div>
+    {% if field.help_text %}
+      <small>{{ field.help_text|safe }}</small>
+    {% endif %}
+  </div>
+{% elif field.field.widget.input_type == 'number' %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    <div class="ui left icon input">
+      <input id="{{ field.auto_id }}" type="{{ field.field.widget.input_type }}"
+             name="{{ field.html_name }}"
+             placeholder="{{ field.field.widget.attrs.placeholder|default:field.label }}"
+             class="{{ field.auto_id }}">
+      {% if field.name == 'token' or field.name == 'otp_token' %}
+        <i class="qrcode icon"></i>
+      {% elif field.name == 'number' %}
+        <i class="phone icon"></i>
+      {% endif %}
+    </div>
+    {% if field.help_text %}
+      <small>{{ field.help_text|safe }}</small>
+    {% endif %}
+  </div>
+{% else %}
+  <div class="field {% if field.errors %}error{% endif %}">
+    {{ field }}
+  </div>
+{% endif %}

@@ -1,0 +1,14 @@
+{% if form.errors %}
+  <div class="ui negative message">
+    <i class="close icon"></i>
+    {% for errors in form.errors.values %}
+      {% for error in errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% for field in form %}
+  {% include "two_factor/_form_field.html" with field=field %}
+{% endfor  %}

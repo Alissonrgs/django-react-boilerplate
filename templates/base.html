@@ -1,0 +1,25 @@
+<!doctype html>
+{% load static %}
+{% load i18n %}
+
+<html lang="pt-br">
+<head>
+  <!--Import Google Icon Font-->
+  {% comment %} <link rel="shortcut icon" href="{% static 'favicon.ico' %}" /> {% endcomment %}
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Project - {% block head-title %}{% endblock %}</title>
+
+  {% block extra-styles %}{% endblock %}
+</head>
+<body>
+  {% block body %}
+    {% block page-header %}{% endblock %}
+    {% block page-content %}{% endblock %}
+    {% block page-footer %}{% endblock %}
+  {% endblock %}
+  {% block extra-scripts %}{% endblock %}
+</body>
+</html>

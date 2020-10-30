@@ -2,7 +2,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:12
-    container_name: project_name-pg
+    container_name: project-pg
     environment:
       POSTGRES_DB: db
       POSTGRES_USER: user

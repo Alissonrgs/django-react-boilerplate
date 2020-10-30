@@ -1,0 +1,47 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="ui segment">
+  <img class="ui image" style="margin: auto" width="200px" src="">
+
+  <div class="ui huge header">
+    {% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
+  </div>
+
+  <div class="ui success message">
+    {% blocktrans %}Congratulations, you've successfully enabled two-factor
+      authentication.{% endblocktrans %}
+  </div>
+
+  {% if not phone_methods %}
+    <p>
+      <div class="ui buttons">
+        <a href="{% url 'two_factor:profile' %}"
+           class="btn btn-block btn-default">{% trans "Back to Profile" %}</a>
+      </div>
+    </p>
+  {% else %}
+    <div class="ui header">
+      <div class="sub header" style="text-align: justify;">
+        {% blocktrans %}However, it might happen that you don't have access to
+      your primary token device. To enable account recovery, add a phone
+      number.{% endblocktrans %}
+      </div>
+    </div>
+
+    <p>
+      <div class="ui two buttons">
+        <a href="{% url 'two_factor:backup_tokens' %}"
+          class="ui button primary">{% trans "Backup Tokens" %}</a>
+        <a href="{% url 'two_factor:phone_create' %}"
+          class="ui button primary">{% trans "Add Phone Number" %}</a>
+      </div>
+    </p>
+  {% endif %}
+
+  <a href="{% url 'index' %}" class="fluid ui button positive">
+    <i aria-hidden="true" class="sign-in icon"></i> {% trans "Access Project" %}</a>
+</div>
+{% endblock %}

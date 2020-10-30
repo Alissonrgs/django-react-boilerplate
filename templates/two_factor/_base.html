@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'semantic/semantic.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+  {% block content_wrapper %}
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  {% endblock %}
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static 'semantic/semantic.min.js' %}"></script>
+  <script>
+    $(window).load(function() {
+      $('.message .close')
+        .on('click', function() {
+          $(this)
+            .closest('.message')
+            .transition('fade')
+        })
+    })
+  </script>
+</body>
+</html>
