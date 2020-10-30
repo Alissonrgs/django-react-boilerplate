@@ -13,6 +13,20 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: example@email.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    network_mode: bridge
+    ports:
+      - 9000:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
 volumes:
   pg_data:
+    driver: local
+  pgadmin_data:
     driver: local
