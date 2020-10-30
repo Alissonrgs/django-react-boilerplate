@@ -38,7 +38,13 @@ SECRET_KEY = os.getenv('SECRET_KEY', '0oew=(&hwcs5z_j1u#kyc&70+azsmxtct29!_xv#()
 # https://docs.djangoproject.com/en/3.1/ref/settings/#debug
 DEBUG = ast.literal_eval(os.getenv('DEBUG', 'True'))
 
-HOME_DIR = '/tmp' if DEBUG else os.path.expanduser('~')
+# https://docs.djangoproject.com/en/3.1/ref/settings/#admins
+ADMINS = [] if DEBUG else [
+    ('Example', 'example@email.com')
+]
+
+# https://docs.djangoproject.com/en/3.1/ref/settings/#managers
+MANAGERS = ADMINS
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -60,9 +66,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party
+    'allauth',
+    'allauth.account',
     'django_extensions',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
 
     # project
+    'accounts',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +87,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Always include for two-factor auth
+    # 'django_otp.middleware.OTPMiddleware',
+    'accounts.middleware.CustomOTPMiddleware',
+
+    # Include for twilio gateway
+    'two_factor.middleware.threadlocals.ThreadLocals'
 ]
 
 ROOT_URLCONF = 'project_name.urls'
@@ -133,16 +154,19 @@ AUTHENTICATION_BACKENDS = [
     # Django ModelBackend is the default authentication backend.
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#login-redirect-url
 # LOGIN_REDIRECT_URL = ''
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#login-url
-# LOGIN_URL = ''
+LOGIN_URL = 'two_factor:login'
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#logout-redirect-url
-# LOGOUT_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = 'two_factor:login'
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
@@ -162,6 +186,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
     }
 ]
+
+# https://docs.djangoproject.com/en/3.1/ref/settings/#site-id
+# https://django-allauth.readthedocs.io/en/latest/installation.html#django
+SITE_ID = 1
 
 
 # ### SECURITY ###
@@ -229,7 +257,7 @@ USE_TZ = True
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#static-root
 STATIC_ROOT_PATH = 'static/'
-STATIC_ROOT = None if DEBUG else HOME_DIR / STATIC_ROOT_PATH
+STATIC_ROOT = None if DEBUG else BASE_DIR / STATIC_ROOT_PATH
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#static-url
 STATIC_URL = '/static/'
@@ -239,19 +267,49 @@ STATICFILES_DIRS = [
     BASE_DIR / 'statics',
 ]
 
-# https://docs.djangoproject.com/en/2.2/ref/settings/#managers
-MANAGERS = ADMINS
-
-HOME = '/tmp' if DEBUG else os.path.expanduser('~')
 
 # ### MEDIA ###
 
-# https://docs.djangoproject.com/en/2.2/ref/settings/#media-root
-MEDIA_BASE_DIR = BASE_DIR if DEBUG else HOME
+# https://docs.djangoproject.com/en/3.1/ref/settings/#media-root
 MEDIA_ROOT_PATH = 'media/'
-PRIVATE_MEDIA_ROOT_PATH = 'media_private/'
-MEDIA_ROOT = os.path.join(MEDIA_BASE_DIR, MEDIA_ROOT_PATH)
-PRIVATE_MEDIA_ROOT = os.path.join(MEDIA_BASE_DIR, PRIVATE_MEDIA_ROOT_PATH)
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_ROOT_PATH)
 
-# https://docs.djangoproject.com/en/2.2/ref/settings/#meda-iurl
+# https://docs.djangoproject.com/en/3.1/ref/settings/#meda-iurl
 MEDIA_URL = '/media/'
+
+
+# ### DJANGO ALLAUTH ###
+# https://django-allauth.readthedocs.io/en/latest/index.html
+
+# ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional' if DEBUG else 'mandatory'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if DEBUG else 'https'
+# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = not DEBUG
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+# ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_SESSION_REMEMBER = False
+
+
+# ### DJANGO TWO FACTOR AUTH ###
+# https://django-two-factor-auth.readthedocs.io/en/stable/configuration.html
+
+TWO_FACTOR_ENABLED = not DEBUG
+# TWO_FACTOR_CALL_GATEWAY = 'two_factor.gateways.fake.Fake' \
+#   if DEBUG else 'two_factor.gateways.twilio.gateway.Twilio'
+TWO_FACTOR_SMS_GATEWAY = 'two_factor.gateways.fake.Fake' \
+    if DEBUG else 'two_factor.gateways.twilio.gateway.Twilio'
+TWO_FACTOR_QR_FACTORY = 'qrcode.image.pil.PilImage'
+
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID', None)
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN', None)
+TWILIO_CALLER_ID = os.getenv('TWILIO_CALLER_ID', None)
+
+# PHONENUMBER_DEFAULT_REGION = ''

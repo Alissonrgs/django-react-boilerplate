@@ -1,0 +1,10 @@
+{% extends "two_factor/_base.html" %}
+{% load static %}
+
+{% block content_wrapper %}
+  <div class="ui middle center aligned grid i-grid-center">
+    <div class="iu column container-main">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}
