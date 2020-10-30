@@ -61,6 +61,8 @@ INSTALLED_APPS = [
 
     # third party
     'django_extensions',
+    'django_filters',
+    'rest_framework',
 
     # project
 ]
@@ -255,3 +257,30 @@ PRIVATE_MEDIA_ROOT = os.path.join(MEDIA_BASE_DIR, PRIVATE_MEDIA_ROOT_PATH)
 
 # https://docs.djangoproject.com/en/2.2/ref/settings/#meda-iurl
 MEDIA_URL = '/media/'
+
+
+# ### DJANGO REST FRAMEWORK ###
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 50,
+    'MAX_PAGE_SIZE': 100,
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.PageNumberPaginationExt',
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter'
+    ],
+
+    # session auth is adequate for ajax requests
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+
+    # by default, only authenticated users may use the API
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+
+        'core.permissions.IsOTPVerified'
+    ]
+}
