@@ -7,7 +7,7 @@
 /* MENU */
 
 .ui.menu.top-menu {
-    background-color: #ED3237;
+    background-color: #24292e;
     border-radius: unset;
     border-top: unset !important;
 }
@@ -24,7 +24,7 @@
 }
 
 .top-menu-filter {
-    background-color: #ED3237 !important;
+    background-color: #24292e !important;
 }
 
 /* .ui.menu. */
