@@ -1,0 +1,35 @@
+body {
+  background-color: #cccccc;
+  background-repeat: repeat;
+}
+
+#id_method-method {
+  list-style-type: none;
+  text-align: start;
+  width: 40%;
+}
+
+#id_setup-method {
+  list-style-type: none;
+  text-align: start;
+  width: 40%;
+}
+
+.i-grid-center {
+  align-items: center !important;
+  display: flex !important;
+  height: 102vh;
+  justify-content: center !important;
+}
+
+.container-main {
+  max-width: 450px;
+}
+
+.i-tf-form #id_method-method, .i-tf-form #id_setup-method {
+  width: 100% !important;
+}
+
+.margin-auto {
+  margin: auto !important;
+}
