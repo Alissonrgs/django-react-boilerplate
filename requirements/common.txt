@@ -1,7 +1,11 @@
+django-allauth~=0.43.0
 django-extensions~=3.0.9
+django-two-factor-auth~=1.13
 django~=3.1.2
+phonenumbers~=8.12.11
 psycopg2-binary~=2.8.6
 psycopg2~=2.8.6
 python-dotenv~=0.14.0
 django-webpack-loader~=0.7.0
 django-js-reverse~=0.9.1
+twilio~=6.46.0

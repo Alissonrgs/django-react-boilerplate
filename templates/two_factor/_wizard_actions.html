@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<div class="ui two buttons">
+  {% if wizard.steps.prev %}
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"
+            class="ui button">
+      {% trans "Back" %}</button>
+  {% elif cancel_url %}
+    {% comment %} <button disabled name="" type="button" class="ui button disabled">
+      {% trans "Back" %}</button> {% endcomment %}
+    <a href="{{ cancel_url }}" class="ui button">
+      {% trans "Cancel" %}</a>
+  {% endif %}
+
+  <button type="submit" class="ui button positive">
+    {% trans "Next" %}</button>
+</div>
+
+{% comment %} {% cancel_url %}
+  <a href="{{ cancel_url }}">
+    {% trans "Cancel" %}</a>
+{% endif %} {% endcomment %}
