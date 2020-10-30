@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom'
 import _ from 'lodash'
 
 // components
+import TMenu from './components/app/tmenu'
 import RouteWithSubRoutes from './components/common/route-with-sub-routes'
 
 // statics
@@ -14,12 +15,14 @@ import Route from './routes/Route'
 const App:React.FC = () => {
   return (
     <>
-      <Switch>
-        {_.map(Route, (route, index) => (
-          <RouteWithSubRoutes key={index} {...route} />
-        ))}
-        <Redirect from='*' to='/' />
-      </Switch>
+      <TMenu>
+        <Switch>
+          {_.map(Route, (route, index) => (
+            <RouteWithSubRoutes key={index} {...route} />
+          ))}
+          <Redirect from='*' to='/' />
+        </Switch>
+      </TMenu>
     </>
   )
 }

@@ -6,8 +6,10 @@ const Route:IRouteItem[] = [
   {
     component: Landing,
     exact: true,
-    menu: false,
-    path: '/'
+    menu: true,
+    path: '/',
+    icon: 'home',
+    name: 'Inicial',
   },
 ]
 

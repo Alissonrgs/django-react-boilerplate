@@ -164,7 +164,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#login-redirect-url
-# LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = 'index'
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#login-url
 LOGIN_URL = 'two_factor:login'
