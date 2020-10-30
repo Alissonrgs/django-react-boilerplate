@@ -69,12 +69,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'django_extensions',
+    'django_filters',
     'django_js_reverse',
-    'webpack_loader',
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
+    'rest_framework',
     'two_factor',
+    'webpack_loader',
 
     # project
     'accounts',
@@ -302,6 +304,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_ROOT_PATH)
 MEDIA_URL = '/media/'
 
 
+# ### DJANGO REST FRAMEWORK ###
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 50,
+    'MAX_PAGE_SIZE': 100,
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.PageNumberPagination',
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter'
+    ],
+
+    # session auth is adequate for ajax requests
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+
+    # by default, only authenticated users may use the API
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+
+        'core.permissions.IsOTPVerified'
+    ]
+}
 # ### DJANGO ALLAUTH ###
 # https://django-allauth.readthedocs.io/en/latest/index.html
 
