@@ -49,7 +49,8 @@ urlpatterns = [
 
     # project
     path('', core_views.landing_view, name='landing'),
-    path('project', core_views.index_view, name='index')
+    path('project', core_views.index_view, name='index'),
+    path('api/accounts/', include('accounts.urls'), name='accounts'),
 ]
 
 if settings.DEBUG:
