@@ -1,8 +1,4 @@
 /* APP */
-body {
-    background-color: #1b1c1d;
-}
-
 .app {
     background-color: #ECEFF1;
     min-height: calc(100vh - 113px);
@@ -11,7 +7,7 @@ body {
 /* MENU */
 
 .ui.menu.top-menu {
-    background-color: #059be5;
+    background-color: #ED3237;
     border-radius: unset;
     border-top: unset !important;
 }
@@ -28,7 +24,7 @@ body {
 }
 
 .top-menu-filter {
-    background-color: #059be5 !important;
+    background-color: #ED3237 !important;
 }
 
 /* .ui.menu. */
@@ -60,25 +56,13 @@ body {
     padding: unset !important;
 }
 
-.i-menu-item-search {
-    width: 350px;
-}
-
 .ui.accordion.menu .item .title>.dropdown.icon {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
 }
 
 /* SIDEBAR */
-
 .ui.wide.left.sidebar, .ui.wide.right.sidebar {
     background-color: rgba(27,28,29,1.0);
     width: 210px;
-}
-
-/* FOOTER */
-
-.ui.segment.footer {
-    margin: unset;
-    border-radius: unset;
 }

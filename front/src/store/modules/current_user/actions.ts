@@ -1,3 +1,4 @@
+// local imports
 import { IUserState, UserTypes } from "./types"
 
 export const fetchCurrentUser = () => {

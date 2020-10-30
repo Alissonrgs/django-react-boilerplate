@@ -1,6 +1,8 @@
+// third party imports
 import { Reducer } from 'redux'
 import produce from 'immer'
 
+// local imports
 import { IUserState, UserTypes } from './types'
 
 const STATE_DEFAULT:IUserState = null

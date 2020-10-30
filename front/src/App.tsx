@@ -1,7 +1,10 @@
+// react imports
 import React, { useEffect } from 'react'
 import { Redirect } from "react-router"
 import { Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+
+// third party imports
 import _ from 'lodash'
 
 // redux
