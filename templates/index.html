@@ -1,4 +1,6 @@
 {% load static %}
+{% load render_bundle from webpack_loader %}
+{% load webpack_static from webpack_loader %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,9 +10,14 @@
           content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {% comment %} <link rel="shortcut icon" href="{% static 'favicon.ico' %}"></head> {% endcomment %}
 
-    <title>Project</title>
+    <title>PROJECT NAME</title>
+
+    {% render_bundle 'main' 'css' %}
   </head>
   <body>
-    INDEX
+    <div id="root"></div>
+    {% comment %} <script src="{% url 'javascript-catalog' %}" type="text/javascript"></script> {% endcomment %}
+    <script src="{% url 'js_reverse' %}" type="text/javascript" charset="utf-8"></script>
+    {% render_bundle 'main' 'js' %}
   </body>
 </html>

@@ -1,12 +1,12 @@
 from rest_framework.utils.urls import replace_query_param
-from rest_framework.pagination import PageNumberPagination
+from rest_framework.pagination import PageNumberPagination as rf_pagepagination
 from rest_framework.views import Response
 from rest_framework.settings import api_settings
 
 from collections import OrderedDict
 
 
-class PageNumberPaginationExt(PageNumberPagination):
+class PageNumberPagination(rf_pagepagination):
     """
     Adds extra attributes to response, useful for building
     pagination widgets with range.

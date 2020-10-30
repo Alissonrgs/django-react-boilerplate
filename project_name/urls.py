@@ -20,8 +20,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 # third party
+from django_js_reverse.views import urls_js
 from two_factor.admin import AdminSiteOTPRequired
 from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
 
@@ -43,6 +45,7 @@ urlpatterns = [
     path('', include(tf_twilio_urls)),
 
     # third party
+    path('jsreverse/', cache_page(3600)(urls_js), name='js_reverse'),
 
     # project
     path('', core_views.landing_view, name='landing'),

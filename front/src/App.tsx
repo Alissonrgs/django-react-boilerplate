@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Redirect } from "react-router"
+import { Switch } from 'react-router-dom'
+import _ from 'lodash'
 
-function App() {
+// components
+import RouteWithSubRoutes from './components/common/route-with-sub-routes'
+
+// statics
+import './static/css/app.css'
+
+import Route from './routes/Route'
+
+const App:React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Switch>
+        {_.map(Route, (route, index) => (
+          <RouteWithSubRoutes key={index} {...route} />
+        ))}
+        <Redirect from='*' to='/' />
+      </Switch>
+    </>
+  )
 }
 
-export default App;
+export default App
